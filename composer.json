@@ -1,0 +1,26 @@
+{
+  "name": "remote-tech/com.axe.client",
+  "description": "API client for COM.AXE",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Dorin Penea",
+      "email": "dorin.penea@sw.io"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "lcobucci/clock": "*",
+    "lcobucci/jwt": "*",
+    "league/oauth2-client": "*",
+    "symfony/security-bundle": "*",
+    "symfony/framework-bundle": "*",
+    "doctrine/orm": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "RemoteTech\\ComAxe\\Client\\": "src/"
+    }
+  }
+}
