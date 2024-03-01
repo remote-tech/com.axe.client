@@ -1,11 +1,32 @@
 {
-  "copy-from-package": {
-    "src/Oauth/config/services.yaml": "%CONF_DIR%/packages/remote_tech_axe_oauth.yaml"
-  },
-  "ref": "38f3847c5b58851f7e994a26674c4f2fa7feaeb8",
-  "env": {
-    "AUTHAPI_HOST": "http://rt.local.io:8080",
-    "AUTHAPI_CLIENT_ID": "2",
-    "AUTHAPI_CLIENT_SECRET": "ee48256b25aa8cddec1b0cc0f861d3f2eff2c44546fea93c436f3a7579c0de7c25c488459f6ec3a111d5285fb403f95339d1ba804b578e666bd4b1e85b4a847c"
+  "manifests": {
+    "remote-tech/com.axe.client": {
+      "manifest": {
+        "bundles": {
+          "Acme\\PrivateBundle\\AcmePrivateBundle": [
+            "all"
+          ]
+        },
+        "copy-from-package": {
+          "src/Oauth/config/services.yaml": "%CONF_DIR%/packages/remote_tech_axe_oauth.yaml"
+        }
+      },
+      "files": {
+        "config/packages/acme_private.yaml": {
+          "contents": [
+            "acme_private:",
+            "    encode: true",
+            ""
+          ],
+          "executable": false
+        }
+      },
+      "ref": "38f3847c5b58851f7e994a26674c4f2fa7feaeb8",
+      "env": {
+        "AUTHAPI_HOST": "http://rt.local.io:8080",
+        "AUTHAPI_CLIENT_ID": "2",
+        "AUTHAPI_CLIENT_SECRET": "ee48256b25aa8cddec1b0cc0f861d3f2eff2c44546fea93c436f3a7579c0de7c25c488459f6ec3a111d5285fb403f95339d1ba804b578e666bd4b1e85b4a847c"
+      }
+    }
   }
 }
