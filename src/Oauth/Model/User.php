@@ -1,32 +1,30 @@
 <?php
 
-namespace Oauth\Entity;
+namespace RemoteTech\ComAxe\Client\Oauth\Model;
 
-//use App\Entity\TrustedSource;
-//use App\Repository\UserRepository;
-//use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
+//use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
-#[ORM\Entity]
-class User implements UserInterface
+//#[ORM\Entity]
+class User implements UserInterface //, SerializerInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+//    #[ORM\Id]
+//    #[ORM\GeneratedValue]
+//    #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+//    #[ORM\Column(length: 180, unique: true)]
     private ?string $uuid = null;
 
-    #[ORM\Column]
+//    #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\Column(type: Types::TEXT)]
+//    #[ORM\Column(type: Types::TEXT)]
     private ?string $token = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+//    #[ORM\Column(type: Types::TEXT)]
     private ?string $refreshToken = null;
 
     private ?string $username = null;
@@ -197,5 +195,14 @@ class User implements UserInterface
         $this->lastName = $lastName;
     }
 
-
+//    public function serialize()
+//    {
+//        return serialize($this);
+//    }
+//
+//
+//    public function deserialize()
+//    {
+//        return unserialize();
+//    }
 }

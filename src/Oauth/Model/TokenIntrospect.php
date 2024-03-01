@@ -1,8 +1,8 @@
 <?php
 
-namespace Oauth;
+namespace RemoteTech\ComAxe\Client\Oauth\Model;
 
-class TokenIntrospectDto
+class TokenIntrospect
 {
     public string $status;
     public string $error;
@@ -12,9 +12,9 @@ class TokenIntrospectDto
     public bool $revoked;
     public ?string $expiresOn;
 
-    public static function fromArray(array $array): TokenIntrospectDto
+    public static function fromArray(array $array): TokenIntrospect
     {
-        $self = new TokenIntrospectDto();
+        $self = new TokenIntrospect();
 
         $self->status = $array['status'];
         $self->error = $array['error'];

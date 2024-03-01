@@ -1,6 +1,6 @@
 <?php
 
-namespace Oauth;
+namespace RemoteTech\ComAxe\Client\Oauth;
 
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -13,8 +13,9 @@ use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
+use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
 
-class AuthAuthenticator extends AbstractAuthenticator
+class AuthAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
     public function __construct(
         private readonly AuthService     $authService,
@@ -42,10 +43,16 @@ class AuthAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        // todo: this should be parameterized
         return new RedirectResponse($this->router->generate('dashboard'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
+    {
+        return $this->start($request, $exception);
+    }
+
+    public function start(Request $request, AuthenticationException $authException = null): Response
     {
         return new RedirectResponse($this->authService->generateLoginUrl());
     }

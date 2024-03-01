@@ -1,0 +1,23 @@
+services:
+    rt_authenticator:
+        class: RemoteTech\ComAxe\Client\Oauth\AuthAuthenticator
+        arguments:
+            $authService: '@rt_auth_service'
+            $router: '@router.default'
+
+    rt_auth_service:
+        class: RemoteTech\ComAxe\Client\Oauth\AuthService
+        arguments:
+            $config: '%auth%'
+            $requestStack: '@request_stack'
+            $userProvider: '@RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface'
+#            $managerRegistry: '@doctrine'
+            $logger: ~
+
+    rt_user_provider:
+        class: RemoteTech\ComAxe\Client\Oauth\AuthUserProvider
+        arguments:
+#            $managerRegistry: '@doctrine'
+            $authService: '@rt_auth_service'
+            $logger: ~
+#            $requestStack: '@request_stack'
