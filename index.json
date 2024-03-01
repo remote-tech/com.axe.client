@@ -9,6 +9,6 @@
   "_links": {
     "repository": "github.com/remote-tech/com.axe.client",
     "origin_template": "{package}:{version}@github.com/remote-tech/com.axe.client:main",
-    "recipe_template": "https://api.github.com/repos/remote-tech/com.axe.client/contents/{package_dotted}.{version}.json"
+    "recipe_template": "https://api.github.com/repos/remote-tech/com.axe.client/contents/manifest.json"
   }
 }
