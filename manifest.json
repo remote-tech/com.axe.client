@@ -2,6 +2,7 @@
   "copy-from-package": {
     "src/Oauth/config/services.yaml": "%CONF_DIR%/packages/remote_tech_axe_oauth.yaml"
   },
+  "ref": "38f3847c5b58851f7e994a26674c4f2fa7feaeb8",
   "env": {
     "AUTHAPI_HOST": "http://rt.local.io:8080",
     "AUTHAPI_CLIENT_ID": "2",
