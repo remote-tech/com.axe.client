@@ -1,3 +1,9 @@
+parameters:
+    auth:
+        url: '%env(resolve:AUTHAPI_HOST)%'
+        client_id: '%env(resolve:AUTHAPI_CLIENT_ID)%'
+        client_secret: '%env(resolve:AUTHAPI_CLIENT_SECRET)%'
+
 services:
     rt_authenticator:
         class: RemoteTech\ComAxe\Client\Oauth\AuthAuthenticator
