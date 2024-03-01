@@ -8,6 +8,6 @@
   "is_contrib": true,
   "_links": {
     "repository": "github.com/remote-tech/com.axe.client",
-    "recipe_template": "https://api.github.com/repos/remote-tech/com.axe.client/contents/manifest.json"
+    "recipe_template": "https://api.github.com/repos/remote-tech/com.axe.client/contents/{package_dotted}.{version}.json"
   }
 }
