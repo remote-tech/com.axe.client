@@ -1,0 +1,12 @@
+{
+  "recipes": {
+    "remote-tech/com.axe.client": [
+      "v1.0"
+    ]
+  },
+  "branch": "main",
+  "is_contrib": true,
+  "_links": {
+    "repository": "github.com/remote-tech/com.axe.client"
+  }
+}
