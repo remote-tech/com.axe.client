@@ -8,7 +8,7 @@
           ]
         },
         "copy-from-package": {
-          "src/Oauth/config/services.yaml": "%CONF_DIR%/packages/remote_tech_axe_oauth.yaml"
+          "src/Oauth/config/services.yaml": "%CONFIG_DIR%/packages/remote_tech_axe_oauth.yaml"
         }
       },
       "files": {
