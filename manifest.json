@@ -1,7 +1,4 @@
 {
-  "bundles": {
-    "RemoteTech\\ComAxe\\Client": ["all"]
-  },
   "copy-from-package": {
     "src/Oauth/config/services.yaml": "%CONF_DIR%/packages/remote_tech_axe_oauth.yaml"
   },
