@@ -21,7 +21,7 @@
           "executable": false
         }
       },
-      "ref": "48f3847c5b58851f7e994a26674c4f2fa7feaeb2",
+      "ref": "48f3847c5b58851f7e994a26674c4f2fa7feaeb7",
       "env": {
         "AUTHAPI_HOST": "http://rt.local.io:8080",
         "AUTHAPI_CLIENT_ID": "2",

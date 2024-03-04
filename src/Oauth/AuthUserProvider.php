@@ -4,8 +4,8 @@ namespace RemoteTech\ComAxe\Client\Oauth;
 
 use Doctrine\Persistence\ManagerRegistry;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
-use RemoteTech\ComAxe\Client\Oauth\Model\User;
 use Psr\Log\LoggerInterface;
+use RemoteTech\ComAxe\Client\Oauth\Model\UserModel;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -25,7 +25,7 @@ class AuthUserProvider implements UserProviderInterface, PasswordUpgraderInterfa
     /**
      * @throws IdentityProviderException
      */
-    public function refreshUser(UserInterface|User $user): UserInterface
+    public function refreshUser(UserInterface|UserModel $user): UserInterface
     {
         $introspection = $this->authService->getTokenIntrospection($user->getToken());
 
@@ -45,7 +45,7 @@ class AuthUserProvider implements UserProviderInterface, PasswordUpgraderInterfa
 
     public function supportsClass(string $class): bool
     {
-        return User::class === $class || is_subclass_of($class, User::class);
+        return UserModel::class === $class || is_subclass_of($class, UserModel::class);
     }
 
     public function loadUserByIdentifier(string $identifier): UserInterface
@@ -60,7 +60,7 @@ class AuthUserProvider implements UserProviderInterface, PasswordUpgraderInterfa
         // TODO: Implement upgradePassword() method.
     }
 
-    public function attachToUser(User $user, array $data): User
+    private function attachToUser(UserModel $user, array $data): UserModel
     {
         $user->setEmail($data['email']);
         $user->setFirstName($data['first_name']);

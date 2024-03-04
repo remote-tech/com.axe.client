@@ -2,29 +2,16 @@
 
 namespace RemoteTech\ComAxe\Client\Oauth\Model;
 
-use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
-#[ORM\Entity]
-class User implements UserInterface
+class UserModel implements UserInterface
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    protected ?int $id = null;
-
-    #[ORM\Column(length: 180, unique: true)]
     protected ?string $uuid = null;
 
-    #[ORM\Column]
     protected array $roles = [];
 
-    #[ORM\Column(type: Types::TEXT)]
     protected ?string $token = null;
 
-    #[ORM\Column(type: Types::TEXT)]
     protected ?string $refreshToken = null;
 
     protected ?string $username = null;
@@ -35,10 +22,10 @@ class User implements UserInterface
     protected ?string $lastName = null;
 
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+//    public function getId(): ?int
+//    {
+//        return $this->id;
+//    }
 
     public function getUuid(): ?string
     {

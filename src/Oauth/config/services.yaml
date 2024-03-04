@@ -16,14 +16,30 @@ services:
         arguments:
             $config: '%auth%'
             $requestStack: '@request_stack'
-            $userProvider: '@RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface'
-#            $managerRegistry: '@doctrine'
+            $userProvider:   '@RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface'
             $logger: ~
 
     rt_user_provider:
         class: RemoteTech\ComAxe\Client\Oauth\AuthUserProvider
         arguments:
-#            $managerRegistry: '@doctrine'
             $authService: '@rt_auth_service'
             $logger: ~
-#            $requestStack: '@request_stack'
+
+    # configure the user provider
+    RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface:
+        alias: RemoteTech\ComAxe\Client\Oauth\UserProvider\DoctrineUserProvider
+
+    # doctrine services & config
+    RemoteTech\ComAxe\Client\Oauth\UserProvider\DoctrineUserProvider:
+        class: RemoteTech\ComAxe\Client\Oauth\UserProvider\DoctrineUserProvider
+        arguments:
+            $managerRegistry: '@doctrine'
+
+doctrine:
+    orm:
+        mappings:
+            Oauth:
+                is_bundle: false
+                dir: '%kernel.project_dir%/vendor/remote-tech/com.axe.client/src/Oauth/Model'
+                prefix: 'RemoteTech\ComAxe\Client\Oauth\Model'
+                alias: Oauth

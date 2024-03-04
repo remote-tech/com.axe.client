@@ -16,7 +16,8 @@
     "league/oauth2-client": "*",
     "symfony/security-bundle": "*",
     "symfony/framework-bundle": "*",
-    "doctrine/orm": "*"
+    "doctrine/orm": "*",
+    "ramsey/uuid": "*"
   },
   "extra": {
     "branch-alias": {

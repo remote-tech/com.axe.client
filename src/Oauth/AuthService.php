@@ -9,7 +9,7 @@ use League\OAuth2\Client\Provider\GenericProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
 use RemoteTech\ComAxe\Client\Oauth\Model\TokenIntrospect;
-use RemoteTech\ComAxe\Client\Oauth\Model\User;
+use RemoteTech\ComAxe\Client\Oauth\Model\UserModel;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -45,7 +45,7 @@ class AuthService
     /**
      * @throws IdentityProviderException
      */
-    public function authenticateUser(string $code): User
+    public function authenticateUser(string $code): UserModel
     {
         $this->logger?->info('SSO Authentication Start  -get Token from AXE');
         $token = $this->provider->getAccessToken('authorization_code', ['code' => $code]);
@@ -58,7 +58,7 @@ class AuthService
     /**
      * @throws IdentityProviderException
      */
-    public function refreshAccessToken(string $refreshToken): User
+    public function refreshAccessToken(string $refreshToken): UserModel
     {
         $this->logger?->info('SSO Authentication Refresh  - getToken by RefreshToken from AXE');
         $token = $this->provider->getAccessToken('refresh_token',
@@ -94,26 +94,30 @@ class AuthService
         }
     }
 
-    private function generateUser(array $userData, AccessToken $token): User
+    private function generateUser(array $userData, AccessToken $token): UserModel
     {
+        $userModel = $this->loadUserFromProvider($userData['id']);
 
-        $user = $this->loadUserFromProvider($userData['id']);
-
-        if (!$user instanceof User) {
-            $user = (new User())->setUuid($userData['id']);
-        }
-        $user
-            ->setRoles(["ROLE_USER"])
+        $userModel
+            ->setUuid($this->generateUuid($userData['id']))
             ->setToken($token->getToken())
-            ->setRefreshToken($token->getRefreshToken());
+            ->setRefreshToken($token->getRefreshToken())
+            ->setRoles($userData['roles']);
 
-        $this->userProvider->setUserToStorage($user);
+        $this->userProvider->setUserToStorage($userModel);
 
-        return $user;
+        return $userModel;
     }
 
-    public function loadUserFromProvider(string $identifier): ?User
+    public function loadUserFromProvider(string $identifier): UserModel
     {
         return $this->userProvider->loadUserFromStorage($identifier);
+    }
+
+    private function generateUuid(string $id): string
+    {
+        $namespace = Uuid::uuid5(Uuid::NAMESPACE_DNS, 'rt_account');
+
+        return Uuid::uuid5($namespace, $id);
     }
 }
