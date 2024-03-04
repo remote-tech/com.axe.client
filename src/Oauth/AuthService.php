@@ -8,8 +8,10 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\GenericProvider;
 use League\OAuth2\Client\Token\AccessToken;
 use Psr\Log\LoggerInterface;
+use Ramsey\Uuid\Uuid;
 use RemoteTech\ComAxe\Client\Oauth\Model\TokenIntrospect;
 use RemoteTech\ComAxe\Client\Oauth\Model\UserModel;
+use RemoteTech\ComAxe\Client\Oauth\UserProvider\AxeUserProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 

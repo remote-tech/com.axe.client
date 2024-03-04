@@ -16,7 +16,7 @@ services:
         arguments:
             $config: '%auth%'
             $requestStack: '@request_stack'
-            $userProvider:   '@RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface'
+            $userProvider:   '@RemoteTech\ComAxe\Client\Oauth\UserProvider\AxeUserProviderInterface'
             $logger: ~
 
     rt_user_provider:
@@ -26,12 +26,14 @@ services:
             $logger: ~
 
     # configure the user provider
-    RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface:
-        alias: RemoteTech\ComAxe\Client\Oauth\UserProvider\DoctrineUserProvider
+    RemoteTech\ComAxe\Client\Oauth\UserProvider\AxeUserProviderInterface:
+        alias: RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine
+
+#### - remove the following if you want to use a custom user provider
 
     # doctrine services & config
-    RemoteTech\ComAxe\Client\Oauth\UserProvider\DoctrineUserProvider:
-        class: RemoteTech\ComAxe\Client\Oauth\UserProvider\DoctrineUserProvider
+    RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine:
+        class: RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine
         arguments:
             $managerRegistry: '@doctrine'
 

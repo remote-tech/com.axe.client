@@ -3,11 +3,10 @@
 namespace RemoteTech\ComAxe\Client\Oauth\UserProvider;
 
 use Doctrine\Persistence\ManagerRegistry;
-use RemoteTech\ComAxe\Client\Oauth\AxeUserProviderInterface;
 use RemoteTech\ComAxe\Client\Oauth\Model\User;
 use RemoteTech\ComAxe\Client\Oauth\Model\UserModel;
 
-class DoctrineUserProvider implements AxeUserProviderInterface
+class Doctrine implements AxeUserProviderInterface
 {
     public function __construct(
         private readonly ManagerRegistry $managerRegistry

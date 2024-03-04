@@ -1,6 +1,6 @@
 <?php
 
-namespace RemoteTech\ComAxe\Client\Oauth;
+namespace RemoteTech\ComAxe\Client\Oauth\UserProvider;
 
 use RemoteTech\ComAxe\Client\Oauth\Model\UserModel;
 
