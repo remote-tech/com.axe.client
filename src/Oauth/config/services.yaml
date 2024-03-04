@@ -5,13 +5,13 @@ parameters:
         client_secret: '%env(resolve:AUTHAPI_CLIENT_SECRET)%'
 
 services:
-    rt_authenticator:
+    RemoteTech\ComAxe\Client\Oauth\AuthAuthenticator:
         class: RemoteTech\ComAxe\Client\Oauth\AuthAuthenticator
         arguments:
-            $authService: '@rt_auth_service'
+            $authService: '@RemoteTech\ComAxe\Client\Oauth\AuthService'
             $router: '@router.default'
 
-    rt_auth_service:
+    RemoteTech\ComAxe\Client\Oauth\AuthService:
         class: RemoteTech\ComAxe\Client\Oauth\AuthService
         arguments:
             $config: '%auth%'
@@ -19,18 +19,16 @@ services:
             $userProvider:   '@RemoteTech\ComAxe\Client\Oauth\UserProvider\AxeUserProviderInterface'
             $logger: ~
 
-    rt_user_provider:
+    RemoteTech\ComAxe\Client\Oauth\AuthUserProvider:
         class: RemoteTech\ComAxe\Client\Oauth\AuthUserProvider
         arguments:
-            $authService: '@rt_auth_service'
+            $authService: '@RemoteTech\ComAxe\Client\Oauth\AuthService'
             $logger: ~
-
+    
     # configure the user provider
     RemoteTech\ComAxe\Client\Oauth\UserProvider\AxeUserProviderInterface:
         alias: RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine
-
-#### - remove the following if you want to use a custom user provider
-
+    
     # doctrine services & config
     RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine:
         class: RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine

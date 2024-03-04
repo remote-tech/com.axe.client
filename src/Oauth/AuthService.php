@@ -44,6 +44,11 @@ class AuthService
         return $this->provider->getAuthorizationUrl();
     }
 
+    public function generateLogoutUrl(string $redirectUrl): string
+    {
+        return $this->config['url'] . '/logout?redirect_url=' . urlencode($redirectUrl);
+    }
+
     /**
      * @throws IdentityProviderException
      */
