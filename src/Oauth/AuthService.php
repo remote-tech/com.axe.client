@@ -33,8 +33,8 @@ class AuthService
             'clientId' => $this->config['client_id'],
             'clientSecret' => $this->config['client_secret'],
             'redirectUri' => $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost(),
-            'urlAuthorize' => $this->config['url'] . '/authorize',
-            'urlAccessToken' => $this->config['url'] . '/token',
+            'urlAuthorize' => $this->config['url'] . '/auth/authorize',
+            'urlAccessToken' => $this->config['url'] . '/auth/token',
             'urlResourceOwnerDetails' => $this->config['url'] . '/auth/me'
         ]);
     }
