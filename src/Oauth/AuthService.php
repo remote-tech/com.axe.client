@@ -90,7 +90,7 @@ class AuthService
         try {
             $response = $this->provider->getHttpClient()->request(
                 Request::METHOD_GET,
-                $this->config['url'] . '/auth/introspect?token=' . $token
+                $this->config['url'] . '/introspect?token=' . $token
             );
 
             $decodeResponse = json_decode($response->getBody()->getContents(), true);

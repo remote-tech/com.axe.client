@@ -24,7 +24,10 @@ services:
         arguments:
             $authService: '@RemoteTech\ComAxe\Client\Oauth\AuthService'
             $logger: ~
-    
+
+    RemoteTech\ComAxe\Client\Oauth\LoginSuccessEventListener:
+        tags: [ 'kernel.event_subscriber' ]
+
     # configure the user provider
     RemoteTech\ComAxe\Client\Oauth\UserProvider\AxeUserProviderInterface:
         alias: RemoteTech\ComAxe\Client\Oauth\UserProvider\Doctrine
