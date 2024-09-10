@@ -14,9 +14,12 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface;
+use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class AuthAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
 {
+    use TargetPathTrait;
+
     public function __construct(
         private readonly AuthService     $authService,
         private readonly RouterInterface $router,
@@ -43,8 +46,16 @@ class AuthAuthenticator extends AbstractAuthenticator implements AuthenticationE
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        // todo: this should be parameterized
-        return new RedirectResponse($this->router->generate('dashboard'));
+        if (($targetUrl = $this->getTargetPath($request->getSession(), $firewallName)) !== null) {
+            $this->removeTargetPath($request->getSession(), $firewallName);
+        } else {
+            /** @var string $targetUrl */
+            $targetUrl = $request->headers->get('Referer', '');
+            if (false !== ($pos = strpos($targetUrl, '?'))) {
+                $targetUrl = substr($targetUrl, 0, $pos);
+            }
+        }
+        return new RedirectResponse($targetUrl);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response

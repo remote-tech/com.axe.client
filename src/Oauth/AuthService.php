@@ -33,9 +33,9 @@ class AuthService
             'clientId' => $this->config['client_id'],
             'clientSecret' => $this->config['client_secret'],
             'redirectUri' => $this->requestStack->getCurrentRequest()->getSchemeAndHttpHost(),
-            'urlAuthorize' => $this->config['url'] . '/auth/authorize',
-            'urlAccessToken' => $this->config['url'] . '/auth/token',
-            'urlResourceOwnerDetails' => $this->config['url'] . '/auth/me'
+            'urlAuthorize' => $this->config['url'] . '/authorize',
+            'urlAccessToken' => $this->config['url'] . '/token',
+            'urlResourceOwnerDetails' => $this->config['url'] . '/me'
         ]);
     }
 
@@ -55,6 +55,7 @@ class AuthService
     public function authenticateUser(string $code): UserModel
     {
         $this->logger?->info('SSO Authentication Start  -get Token from AXE');
+
         $token = $this->provider->getAccessToken('authorization_code', ['code' => $code]);
 
         $userData = $this->getUserDetails($token->getToken());
@@ -80,7 +81,7 @@ class AuthService
     public function getUserDetails(string $token): array
     {
         $parsedToken = (new Parser(new JoseEncoder()))->parse($token);
-        
+
         return $parsedToken->claims()->get('user_info');
     }
 
