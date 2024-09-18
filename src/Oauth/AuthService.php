@@ -111,6 +111,11 @@ class AuthService
             ->setToken($token->getToken())
             ->setRefreshToken($token->getRefreshToken())
             ->setRoles($userData['roles']);
+        $userModel->setEmail($userData['email']);
+        $userModel->setFirstName($userData['first_name']);
+        $userModel->setLastName($userData['last_name']);
+        $userModel->setUsername($userData['username']);
+        $userModel->setStatus($userData['status']);
 
         $this->userProvider->setUserToStorage($userModel);
 
