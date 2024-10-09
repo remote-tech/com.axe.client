@@ -90,8 +90,13 @@ class AuthService
         $this->logger?->info('SSO Authentication TokenValidation  -Introspect To AXE');
         try {
             $response = $this->provider->getHttpClient()->request(
-                Request::METHOD_GET,
-                $this->config['url'] . '/introspect?token=' . $token
+                Request::METHOD_POST,
+                $this->config['url'] . '/introspect',
+                [
+                    'json' =>  [
+                        'token' => $token
+                    ]
+                ]
             );
 
             $decodeResponse = json_decode($response->getBody()->getContents(), true);
