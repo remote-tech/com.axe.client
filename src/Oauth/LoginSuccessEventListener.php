@@ -13,6 +13,12 @@ class LoginSuccessEventListener implements EventSubscriberInterface
     // set the app widget cookie
     public function onLoginSuccess(LoginSuccessEvent $event): void
     {
+        $response = $event->getResponse();
+
+        if (null === $response) {
+            return;
+        }
+
         /** @var \RemoteTech\ComAxe\Client\Oauth\Model\UserModel $user */
         $user = $event->getUser();
         $cookie = new Cookie(
@@ -22,8 +28,6 @@ class LoginSuccessEventListener implements EventSubscriberInterface
             path: '/',
             httpOnly: false,
         );
-
-        $response = $event->getResponse();
 
         $response->headers->setCookie($cookie);
     }
