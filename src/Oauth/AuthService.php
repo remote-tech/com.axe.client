@@ -112,7 +112,7 @@ class AuthService
         $userModel = $this->loadUserFromProvider($userData['id']);
 
         $userModel
-            ->setUuid($this->generateUuid($userData['id']))
+            ->setUuid($userData['id'])
             ->setToken($token->getToken())
             ->setRefreshToken($token->getRefreshToken())
             ->setRoles($userData['roles']);
@@ -130,12 +130,5 @@ class AuthService
     public function loadUserFromProvider(string $identifier): UserModel
     {
         return $this->userProvider->loadUserFromStorage($identifier);
-    }
-
-    private function generateUuid(string $id): string
-    {
-        $namespace = Uuid::uuid5(Uuid::NAMESPACE_DNS, 'rt_account');
-
-        return Uuid::uuid5($namespace, $id);
     }
 }
