@@ -73,6 +73,17 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * returns an array containing role name as key and value is an array of organisationIds that role is applied to
+     * @return array{
+     *     roleName: array<int>
+     * }
+     */
+    public function getRawRoles(): array
+    {
+        return $this->roles;
+    }
+
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
