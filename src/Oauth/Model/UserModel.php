@@ -78,7 +78,7 @@ class UserModel implements UserInterface
         return $this->token;
     }
 
-    public function setToken(string $token): static
+    public function setToken(?string $token): static
     {
         $this->token = $token;
 
@@ -90,7 +90,7 @@ class UserModel implements UserInterface
         return $this->refreshToken;
     }
 
-    public function setRefreshToken(string $refreshToken): static
+    public function setRefreshToken(?string $refreshToken): static
     {
         $this->refreshToken = $refreshToken;
 
